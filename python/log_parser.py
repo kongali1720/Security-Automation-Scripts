@@ -66,11 +66,9 @@ class LogParser:
     
     def filter_by_time(self, start_time: str, end_time: str) -> List[Dict]:
         """Filter entries by time range"""
-        # Implementasi sederhana
         filtered = []
         for entry in self.parsed_entries:
             if 'timestamp' in entry:
-                # Tambahkan logika filtering sesuai format timestamp
                 filtered.append(entry)
         return filtered
     
@@ -87,7 +85,6 @@ class LogParser:
             writer.writerows(self.parsed_entries)
         print(f"[✓] Exported to {filename}")
 
-# Contoh penggunaan
 if __name__ == "__main__":
     sample_log = '192.168.1.1 - - [10/Oct/2023:13:55:36] "GET /index.html HTTP/1.1" 200 2326'
     parser = LogParser(sample_log)
