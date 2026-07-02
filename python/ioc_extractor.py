@@ -25,7 +25,6 @@ class IOCExtractor:
         """Ekstrak alamat IP"""
         ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
         ips = re.findall(ip_pattern, text)
-        # Filter IP valid
         valid_ips = set()
         for ip in ips:
             parts = ip.split('.')
@@ -93,7 +92,6 @@ class IOCExtractor:
             json.dump(data, f, indent=2)
         print(f"[✓] IOC exported to {filename}")
 
-# Contoh penggunaan
 if __name__ == "__main__":
     extractor = IOCExtractor()
     
