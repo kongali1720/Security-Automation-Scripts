@@ -58,22 +58,18 @@ class LogAnalyzer:
         pattern_results = self.analyze_patterns()
         ips = self.extract_ips()
         
-        # Statistik
-        total_entries = len(self.logs)
-        suspicious_count = sum(len(v) for v in pattern_results.values())
-        
         report = {
             'timestamp': datetime.now().isoformat(),
             'log_file': self.log_file,
             'statistics': {
-                'total_entries': total_entries,
-                'suspicious_entries': suspicious_count,
+                'total_entries': len(self.logs),
+                'suspicious_entries': sum(len(v) for v in pattern_results.values()),
                 'unique_ips': len(ips)
             },
             'suspicious_patterns': {
                 k: len(v) for k, v in pattern_results.items()
             },
-            'ips_found': ips[:10],  # Limit 10 IP
+            'ips_found': ips[:10],
             'details': pattern_results
         }
         
@@ -99,7 +95,6 @@ def main():
         else:
             print(report)
     else:
-        # Tampilkan ringkasan
         results = analyzer.analyze_patterns()
         print("\n=== LOG ANALYSIS SUMMARY ===")
         for pattern, matches in results.items():
