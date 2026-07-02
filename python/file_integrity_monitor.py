@@ -38,13 +38,11 @@ class FileIntegrityMonitor:
             for file in files:
                 filepath = os.path.join(root, file)
                 
-                # Filter ekstensi
                 if extensions:
                     if not any(filepath.endswith(ext) for ext in extensions):
                         continue
                 
-                # Skip file besar
-                if os.path.getsize(filepath) > 50 * 1024 * 1024:  # 50MB
+                if os.path.getsize(filepath) > 50 * 1024 * 1024:
                     continue
                     
                 file_hash = self.calculate_hash(filepath)
@@ -91,7 +89,6 @@ class FileIntegrityMonitor:
         
         current_files = self.scan_directory()
         
-        # Check modified and deleted
         for filepath, old_hash in self.file_hashes.items():
             if filepath not in current_files:
                 changes['deleted'].append(filepath)
@@ -99,7 +96,6 @@ class FileIntegrityMonitor:
                 if current_files[filepath] != old_hash:
                     changes['modified'].append(filepath)
                     
-        # Check added files
         for filepath in current_files:
             if filepath not in self.file_hashes:
                 changes['added'].append(filepath)
@@ -113,12 +109,10 @@ class FileIntegrityMonitor:
         
         try:
             while True:
-                # Scan awal jika belum ada state
                 if not self.file_hashes:
                     self.file_hashes = self.scan_directory(extensions)
                     self.save_state()
                 
-                # Check integrity
                 changes = self.check_integrity()
                 
                 if any(changes.values()):
@@ -130,7 +124,6 @@ class FileIntegrityMonitor:
                     if changes['deleted']:
                         print(f"  Deleted: {len(changes['deleted'])} files")
                     
-                    # Update state
                     self.file_hashes = self.scan_directory(extensions)
                     self.save_state()
                 else:
@@ -156,13 +149,11 @@ def main():
     if args.monitor:
         monitor.monitor(args.interval, args.extensions)
     else:
-        # One-time check
         monitor.file_hashes = monitor.scan_directory(args.extensions)
         if args.check:
             changes = monitor.check_integrity()
             print(json.dumps(changes, indent=2))
         else:
-            # Initial scan
             monitor.save_state()
             print(f"[✓] Initial scan completed. {len(monitor.file_hashes)} files hashed.")
 
