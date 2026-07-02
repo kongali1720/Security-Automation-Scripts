@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""
+YARA Scanner - Scan file/direktori dengan YARA rules
+"""
+
+import os
+import sys
+import json
+import argparse
+from typing import List, Dict, Tuple
+import yara
+
+class YaraScanner:
+    def __init__(self, rules_path: str):
+        self.rules_path = rules_path
+        self.rules = None
+        
+    def compile_rules(self) -> bool:
+        """Compile YARA rules"""
+        try:
+            if os.path.isdir(self.rules_path):
+                # Load all .yar files from directory
+                rule_files = {}
+                for file in os.listdir(self.rules_path):
+                    if file.endswith(('.yar', '.yara')):
+                        rule_files[file] = os.path.join(self.rules_path, file)
+                self.rules = yara.compile(filepaths=rule_files)
+            else:
+                # Single rule file
+                self.rules = yara.compile(filepath=self.rules_path)
+            print(f"[✓] Rules compiled successfully")
+            return True
+        except Exception as e:
+            print(f"[✗] Failed to compile rules: {e}")
+            return False
+    
+    def scan_file(self, filepath: str) -> List[Dict]:
+        """Scan single file dengan YARA"""
+        results = []
+        try:
+            matches = self.rules.match(filepath)
+            for match in matches:
+                results.append({
+                    'file': filepath,
+                    'rule': match.rule,
+                    'tags': match.tags,
+                    'meta': match.meta,
+                    'strings': [{'id': s.identifier, 'value': s.value} 
+                               for s in match.strings]
+                })
+        except Exception as e:
+            print(f"[!] Error scanning {filepath}: {e}")
+        return results
+    
+    def scan_directory(self, directory: str, recursive: bool = True) -> List[Dict]:
+        """Scan directory dengan YARA"""
+        results = []
+        
+        if recursive:
+            for root, _, files in os.walk(directory):
+                for file in files:
+                    filepath = os.path.join(root, file)
+                    # Skip large files (> 100MB)
+                    if os.path.getsize(filepath) > 100 * 1024 * 1024:
+                        continue
+                    results.extend(self.scan_file(filepath))
+        else:
+            for file in os.listdir(directory):
+                filepath = os.path.join(directory, file)
+                if os.path.isfile(filepath):
+                    results.extend(self.scan_file(filepath))
+                    
+        return results
+    
+    def generate_report(self, results: List[Dict], output_file: str = None):
+        """Generate laporan scan"""
+        report = {
+            'total_matches': len(results),
+            'matched_rules': {},
+            'files_affected': set(),
+            'details': results
+        }
+        
+        # Statistik
+        for result in results:
+            rule_name = result['rule']
+            if rule_name not in report['matched_rules']:
+                report['matched_rules'][rule_name] = 0
+            report['matched_rules'][rule_name] += 1
+            report['files_affected'].add(result['file'])
+        
+        report['files_affected'] = list(report['files_affected'])
+        
+        if output_file:
+            with open(output_file, 'w') as f:
+                json.dump(report, f, indent=2)
+            print(f"[✓] Report saved to {output_file}")
+        else:
+            print(json.dumps(report, indent=2))
+            
+        return report
+
+def main():
+    parser = argparse.ArgumentParser(description='YARA Scanner untuk keamanan')
+    parser.add_argument('-r', '--rules', required=True, help='Path ke YARA rules atau directory')
+    parser.add_argument('-t', '--target', required=True, help='Target file atau directory')
+    parser.add_argument('-o', '--output', help='Output report file (opsional)')
+    parser.add_argument('--recursive', action='store_true', help='Scan recursive untuk directory')
+    
+    args = parser.parse_args()
+    
+    scanner = YaraScanner(args.rules)
+    if not scanner.compile_rules():
+        sys.exit(1)
+    
+    if os.path.isfile(args.target):
+        results = scanner.scan_file(args.target)
+    elif os.path.isdir(args.target):
+        results = scanner.scan_directory(args.target, args.recursive)
+    else:
+        print(f"[✗] Target tidak ditemukan: {args.target}")
+        sys.exit(1)
+    
+    if results:
+        scanner.generate_report(results, args.output)
+        print(f"\n[✓] Scan selesai. Ditemukan {len(results)} matches")
+    else:
+        print("[✓] Tidak ada matches ditemukan")
+
+if __name__ == "__main__":
+    main()
