@@ -1,351 +1,297 @@
-
 <p align="center">
-<img src="https://github.com/kongali1720/KongWallet-Payment-Gateway-API/blob/main/kop_surat.jpg" width="100%">
+  <img src="https://github.com/kongali1720/KongWallet-Payment-Gateway-API/blob/main/kop_surat.jpg" width="100%" alt="Header">
 </p>
-
-<p align="center">
-
 
 <div align="center">
 
-<h3>
-Cyber Defense Architect • Security Engineer • Web3 Builder
-</h3>
-
----
-
 # 🛡️ Security Automation Scripts
 
-<p align="center">
+**Enterprise-grade automation framework for Blue Team operations, SOC analysis, and proactive system hardening.**
 
-![GitHub Repo stars](https://img.shields.io/github/stars/kongali1720/Security-Automation-Scripts?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/kongali1720/Security-Automation-Scripts?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/kongali1720/Security-Automation-Scripts?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/kongali1720/Security-Automation-Scripts?style=for-the-badge)
+[![GitHub Repo stars](https://img.shields.io/github/stars/kongali1720/Security-Automation-Scripts?style=flat-square&color=blue)](https://github.com/kongali1720/Security-Automation-Scripts)
+[![GitHub forks](https://img.shields.io/github/forks/kongali1720/Security-Automation-Scripts?style=flat-square&color=blue)](https://github.com/kongali1720/Security-Automation-Scripts)
+[![GitHub issues](https://img.shields.io/github/issues/kongali1720/Security-Automation-Scripts?style=flat-square&color=red)](https://github.com/kongali1720/Security-Automation-Scripts/issues)
+[![License](https://img.shields.io/github/license/kongali1720/Security-Automation-Scripts?style=flat-square&color=green)](LICENSE)
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
-![Bash](https://img.shields.io/badge/Bash-Supported-black?style=for-the-badge&logo=gnubash)
-![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?style=for-the-badge&logo=powershell)
-![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?style=for-the-badge&logo=windows)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+<img src="https://skillicons.dev/icons?i=python,bash,powershell,linux,windows,git,github" alt="Tech Stack"/>
 
-</p>
+</div>
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-**Security Automation Scripts** is an open-source collection of Python, Bash, and PowerShell scripts designed to automate common cybersecurity tasks for Blue Team operations, SOC analysts, system administrators, and security enthusiasts.
+**Security Automation Scripts** merupakan kumpulan script automation lintas platform (**Python, Bash, dan PowerShell**) yang dirancang untuk membantu aktivitas Security Operations Center (SOC), Blue Team, Incident Response, Threat Hunting, serta Hardening Infrastruktur.
 
-This repository focuses on defensive security, security monitoring, incident response, and system auditing.
+Framework ini mempermudah proses:
+
+- Incident Triage
+- Threat Intelligence
+- Host Hardening
+- Digital Forensics
+- Compliance Audit
+- Security Monitoring
 
 ---
 
-## ✨ Features
+# 🎯 Key Capabilities
+
+- 🔍 **Incident Response & Triage**
+  - IOC Extraction
+  - Log Parsing
+  - YARA Malware Detection
+  - File Integrity Monitoring
+
+- 🌐 **Attack Surface Monitoring**
+  - DNS Lookup
+  - WHOIS Lookup
+  - External Intelligence
+
+- 🛡️ **Host Hardening**
+  - Linux Security Audit
+  - Windows Security Audit
+  - SSH Hardening
+  - Firewall Validation
+
+---
+
+# 🏗️ Core Architecture
 
 ```mermaid
-mindmap
-  root((🛡️ Security Automation))
-    🔍 Log Analysis
-      Parse Security Logs
-      Detect Suspicious Events
-      Generate Reports
+graph TD
 
-    📁 File Integrity Monitoring
-      File Change Detection
-      Hash Comparison
-      Integrity Verification
+Root[Security Automation Scripts]
 
-    🌐 DNS Lookup
-      DNS Records
-      Reverse DNS
-      Name Resolution
+Root --> PY[🐍 Python Engine]
+Root --> SH[🐧 Linux Hardening]
+Root --> PS[🪟 Windows Audit]
 
-    🌍 WHOIS Lookup
-      Domain Information
-      Registration Details
-      Expiration Check
+PY --> PY1[IOC Extractor]
+PY --> PY2[Log Analyzer]
+PY --> PY3[YARA Scanner]
+PY --> PY4[FIM Engine]
 
-    🔐 Hash Verification
-      MD5
-      SHA1
-      SHA256
-      SHA512
+SH --> SH1[System Audit]
+SH --> SH2[SSH Hardening]
+SH --> SH3[Firewall Controller]
 
-    📄 IOC Extraction
-      IP Addresses
-      Domains
-      URLs
-      Email Addresses
-      File Hashes
-
-    🛡 Linux Security Audit
-      User Audit
-      SSH Configuration
-      Firewall Status
-      System Hardening
-
-    🪟 Windows Security Audit
-      Event Logs
-      Defender Status
-      Firewall Configuration
-      Local Security Checks
-
-    📊 Security Reporting
-      HTML Reports
-      JSON Output
-      CSV Export
-
-    ⚡ Automation
-      Scheduled Tasks
-      Batch Processing
-      Script Chaining
-
-    📈 Threat Hunting
-      IOC Analysis
-      Threat Indicators
-      Log Correlation
-
-    🔎 Network Utilities
-      DNS Tools
-      Port Analysis
-      Connectivity Checks
-```
-
-## 📂 Repository Structure
-
-```mermaid
-flowchart TD
-
-    A["🛡️ Security-Automation-Scripts"]
-
-    A --> B["📄 README.md"]
-    A --> C["📜 LICENSE"]
-    A --> D["📦 requirements.txt"]
-
-    A --> E["🐍 Python Scripts"]
-    A --> F["🐧 Bash Scripts"]
-    A --> G["🪟 PowerShell Scripts"]
-
-    A --> H["📚 docs"]
-    A --> I["🖼️ screenshots"]
-    A --> J["🧪 samples"]
-    A --> K["📊 reports"]
-
-    E --> E1["log_analyzer.py"]
-    E --> E2["hash_checker.py"]
-    E --> E3["ioc_extractor.py"]
-    E --> E4["dns_lookup.py"]
-    E --> E5["whois_lookup.py"]
-    E --> E6["url_checker.py"]
-    E --> E7["file_integrity_monitor.py"]
-    E --> E8["password_audit.py"]
-    E --> E9["yara_scanner.py"]
-    E --> E10["log_parser.py"]
-    E --> E11["report_generator.py"]
-    E --> E12["network_monitor.py"]
-
-    F --> F1["system_audit.sh"]
-    F --> F2["firewall_status.sh"]
-    F --> F3["ssh_hardening.sh"]
-    F --> F4["backup_logs.sh"]
-    F --> F5["user_audit.sh"]
-
-    G --> G1["windows_audit.ps1"]
-    G --> G2["defender_status.ps1"]
-    G --> G3["firewall_check.ps1"]
-    G --> G4["eventlog_parser.ps1"]
+PS --> PS1[Event Log Parser]
+PS --> PS2[Windows Audit]
+PS --> PS3[Defender Status]
 ```
 
 ---
 
-# 🐍 Python Scripts
+# 🗂️ Module Reference
 
-| Script | Description |
-|---------|-------------|
-| log_analyzer.py | Analyze security logs |
-| hash_checker.py | Calculate and verify file hashes |
-| ioc_extractor.py | Extract IPs, URLs, Domains and Hashes |
-| dns_lookup.py | DNS Information Lookup |
-| whois_lookup.py | WHOIS Lookup |
-| url_checker.py | URL Validation |
-| file_integrity_monitor.py | Detect file modifications |
-| password_audit.py | Password Strength Checker |
-| yara_scanner.py | Scan files using YARA rules |
-| report_generator.py | Generate HTML Reports |
-| network_monitor.py | Monitor Network Connections |
+## 🐍 Python Engine (`/python`)
+
+| Utility | Functional Scope | Target Artifacts |
+|----------|------------------|------------------|
+| `log_analyzer.py` | SIEM-style log parsing | Auth Logs, Apache, Nginx |
+| `log_parser.py` | Dynamic log parser | Generic Log Files |
+| `file_integrity_monitor.py` | Baseline hashing & drift detection | Critical System Files |
+| `ioc_extractor.py` | Extract IP, Domain, URL, Hash | Threat Intelligence |
+| `yara_scanner.py` | Signature malware detection | PE Files, Scripts |
+| `report_generator.py` | Executive HTML Report Generator | JSON Reports |
 
 ---
 
-# 🐧 Bash Scripts
+## 🐧 Linux Hardening (`/bash`)
 
-| Script | Description |
-|---------|-------------|
-| system_audit.sh | Linux Security Audit |
-| ssh_hardening.sh | SSH Hardening |
-| firewall_status.sh | Firewall Status |
-| backup_logs.sh | Backup Security Logs |
-| user_audit.sh | User Account Audit |
+| Utility | Functional Scope | Compliance |
+|----------|------------------|------------|
+| `system_audit.sh` | Linux Security Audit | CIS Benchmark |
+| `ssh_hardening.sh` | SSH Configuration Hardening | `/etc/ssh/sshd_config` |
+| `user_audit.sh` | User Enumeration & Shadow Audit | `/etc/passwd` |
 
 ---
 
-# 🪟 PowerShell Scripts
+## 🪟 Windows Security (`/powershell`)
 
-| Script | Description |
-|---------|-------------|
-| windows_audit.ps1 | Windows Security Audit |
-| defender_status.ps1 | Microsoft Defender Status |
-| firewall_check.ps1 | Windows Firewall Audit |
-| eventlog_parser.ps1 | Windows Event Log Parser |
+| Utility | Functional Scope | Event IDs |
+|----------|------------------|-----------|
+| `eventlog_parser.ps1` | Windows Event Log Parsing | 4624, 4625, 7045 |
+| `windows_audit.ps1` | Local Security Audit | Hotfix, Build, Defender |
 
 ---
-## 🚀 Quick Start
 
-### 1️⃣ Clone Repository
+# 🚀 Deployment
+
+## Prerequisites
+
+- Python 3.10+
+- PowerShell 7+
+- Bash Shell
+- Administrator / Root Privileges
+
+---
+
+## 1️⃣ Installation
 
 ```bash
 git clone https://github.com/kongali1720/Security-Automation-Scripts.git
+
 cd Security-Automation-Scripts
-```
 
-### 2️⃣ Install Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Run a Script
+---
 
-| Platform | Command |
-|----------|---------|
-| 🐍 Python | `python python/log_analyzer.py` |
-| 🐧 Linux | `bash bash/system_audit.sh` |
-| 🪟 Windows | `powershell .\powershell\windows_audit.ps1` |
+## 2️⃣ IOC Extraction
+
+```bash
+python python/ioc_extractor.py \
+--input /path/to/suspect_payload.txt
+```
 
 ---
 
-## 📊 Project Workflow
+## 3️⃣ Linux Security Audit
 
-```mermaid
-flowchart LR
+```bash
+chmod +x bash/system_audit.sh
 
-A[Collect Data]
--->B[Analyze]
--->C[Detect]
--->D[Generate Report]
--->E[Response]
-
-B --> F[Logs]
-B --> G[DNS]
-B --> H[Hashes]
-B --> I[Files]
+sudo ./bash/system_audit.sh
 ```
 
-## 🗺️ Roadmap
+---
 
-| Status | Feature |
-|:------:|---------|
-| ✅ | Log Analyzer |
-| ✅ | Hash Checker |
-| ✅ | IOC Extractor |
-| ✅ | DNS Lookup |
-| ✅ | WHOIS Lookup |
-| ✅ | URL Validation |
-| 🚧 | VirusTotal Integration |
-| 🚧 | AbuseIPDB Integration |
-| 🚧 | Shodan Integration |
-| 🚧 | HTML Dashboard |
-| 🚧 | PDF Report Generator |
-| 🚧 | Email Notification |
-| 🚧 | SIEM Integration |
-| 🚧 | GitHub Actions CI/CD |
+## 4️⃣ Windows Audit
 
-## 🏗 Architecture
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
 
-```mermaid
-flowchart TB
-
-A[Security Scripts]
-
-A --> B[Python]
-A --> C[Bash]
-A --> D[PowerShell]
-
-B --> E[Log Analysis]
-B --> F[IOC Extraction]
-B --> G[Hash Verification]
-
-C --> H[Linux Audit]
-C --> I[SSH Hardening]
-
-D --> J[Windows Audit]
-D --> K[Defender Check]
+.\powershell\windows_audit.ps1 -Detailed
 ```
 
-## 🛠 Tech Stack
+---
 
-<p>
+# 📊 Engineering Roadmap
 
-<img src="https://skillicons.dev/icons?i=python,bash,powershell,linux,windows,git,github,vscode" />
+```text
+Security Automation Scripts
 
-</p>
-
-## 🤝 Contributing
-
-Contributions are always welcome!
-
-```mermaid
-graph LR
-
-Fork --> Code
-Code --> Commit
-Commit --> Push
-Push --> PullRequest
-PullRequest --> Review
-Review --> Merge
+├── ✅ Core Automation Engine
+│   ├── Log Analyzer
+│   ├── IOC Extractor
+│   ├── YARA Scanner
+│   └── File Integrity Monitor
+│
+├── 🚧 External Threat Intelligence
+│   ├── VirusTotal
+│   ├── AbuseIPDB
+│   └── Shodan API
+│
+├── 📅 SIEM Integration
+│   ├── Splunk
+│   ├── Elastic Stack
+│   └── Graylog
+│
+└── 📅 Dashboard Generator
 ```
 
-## ⭐ Support
+---
 
-If this project helps you, consider supporting it by giving it a ⭐.
+## Progress
 
-| ⭐ Star | 🍴 Fork | 🐛 Issue | 💡 Feature Request |
-|:------:|:-------:|:-------:|:------------------:|
-| Show support | Contribute | Report bugs | Suggest ideas |
+- ✅ Log Analysis Engine
+- ✅ IOC Extraction
+- ✅ File Integrity Monitoring
+- ✅ Security Mapping
+- 🚧 VirusTotal Integration
+- 🚧 AbuseIPDB Integration
+- ⬜ SIEM Forwarder
+- ⬜ GitHub Actions CI/CD
+- ⬜ Web Dashboard
+
+---
+
+# 🤝 Contributing
+
+Kontribusi sangat diapresiasi.
+
+Sebelum membuat Pull Request, pastikan:
+
+- Menggunakan **flake8** untuk Python.
+- Menggunakan **ShellCheck** untuk Bash.
+- Dokumentasikan seluruh CLI menggunakan `argparse`.
+- Sertakan contoh penggunaan.
+- Update dokumentasi apabila menambah modul baru.
+
+---
+
+# 📂 Repository Structure
+
+```text
+Security-Automation-Scripts/
+
+├── python/
+│   ├── log_analyzer.py
+│   ├── log_parser.py
+│   ├── ioc_extractor.py
+│   ├── yara_scanner.py
+│   ├── file_integrity_monitor.py
+│   └── report_generator.py
+│
+├── bash/
+│   ├── system_audit.sh
+│   ├── ssh_hardening.sh
+│   └── user_audit.sh
+│
+├── powershell/
+│   ├── eventlog_parser.ps1
+│   └── windows_audit.ps1
+│
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
+---
+
 # 📄 License
 
-This project is licensed under the MIT License.
+Distributed under the **MIT License**.
+
+See **LICENSE** for more information.
 
 ---
 
 # 👨‍💻 Author
 
-**Kong Ali**
+**Developed & Maintained by Kong Ali**
 
-Cybersecurity Enthusiast
+**Focus Areas**
 
-Blue Team | Security Automation | Python | Linux | Windows | SOC
+- 🔵 Blue Team Engineering
+- 🔴 Incident Response
+- 🛡️ Security Automation
+- 🔍 Threat Hunting
+- 📊 Security Operations Center (SOC)
 
-GitHub: https://github.com/kongali1720
+GitHub: **@kongali1720**
 
 ---
 
-<p align="center">
+<div align="center">
 
-### 🛡️ Secure • Automate • Monitor • Defend 🛡️
+### ⭐ If this project helps you, don't forget to leave a Star!
 
-Made with ❤️ for the Cybersecurity Community
+Made with ❤️ for the Cyber Security Community.
 
-</p>
+</div>
+
+---
 
 <div align="center">
 
 
 # ☕ Support Development
 
-
 Jika project ini membantu kamu,
+
 support kecil sangat berarti.
 
 
@@ -354,6 +300,5 @@ support kecil sangat berarti.
 <img src="https://img.shields.io/badge/BUY_ME_A_COFFEE-support-yellow?style=for-the-badge&logo=buymeacoffee">
 
 </a>
-
 
 </div>
