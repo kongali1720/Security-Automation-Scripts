@@ -6,26 +6,22 @@
     Script untuk menganalisis event log Windows
 #>
 
-# Configuration
 $ErrorActionPreference = "Stop"
 
-# Colors
 function Write-Info { Write-Host "ℹ $($args[0])" -ForegroundColor Yellow }
 function Write-Success { Write-Host "✓ $($args[0])" -ForegroundColor Green }
 function Write-Error { Write-Host "✗ $($args[0])" -ForegroundColor Red }
 
-# Check admin rights
 function Test-AdminRights {
     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-# Parse event logs
 function Get-SecurityEvents {
     param(
         [int]$MaxEvents = 100,
         [DateTime]$StartDate = (Get-Date).AddDays(-7),
-        [int]$EventID = 4624 # Login events
+        [int]$EventID = 4624
     )
     
     Write-Info "Parsing security events from $StartDate..."
@@ -53,7 +49,6 @@ function Get-SecurityEvents {
     return $events
 }
 
-# Analyze failed logins
 function Get-FailedLogins {
     param([int]$MaxEvents = 50)
     
@@ -75,7 +70,6 @@ function Get-FailedLogins {
     }
 }
 
-# Check for admin activity
 function Get-AdminActivity {
     param([int]$MaxEvents = 50)
     
@@ -97,7 +91,6 @@ function Get-AdminActivity {
     }
 }
 
-# Analyze system events
 function Get-SystemEvents {
     param([int]$MaxEvents = 50)
     
@@ -105,7 +98,7 @@ function Get-SystemEvents {
     
     $systemEvents = Get-WinEvent -FilterHashtable @{
         LogName = 'System'
-        Level = 1, 2, 3  # Critical, Error, Warning
+        Level = 1, 2, 3
         StartTime = (Get-Date).AddHours(-24)
     } -MaxEvents $MaxEvents
     
@@ -119,7 +112,6 @@ function Get-SystemEvents {
     }
 }
 
-# Generate report
 function Export-EventReport {
     param(
         [string]$OutputPath = "event_report_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv"
@@ -136,7 +128,6 @@ function Export-EventReport {
     
     $report = @()
     
-    # Security events
     foreach ($event in $events) {
         $report += [PSCustomObject]@{
             Type = 'Security'
@@ -148,7 +139,6 @@ function Export-EventReport {
         }
     }
     
-    # Failed logins
     foreach ($event in $failed) {
         $xml = [xml]$event.ToXml()
         $eventData = $xml.Event.EventData.Data
@@ -169,7 +159,6 @@ function Export-EventReport {
     Write-Success "Report exported to $OutputPath"
 }
 
-# Main execution
 function Main {
     Write-Host "=== WINDOWS EVENT LOG PARSER ===" -ForegroundColor Green
     Write-Host "Running event log analysis..." -ForegroundColor Yellow
@@ -180,7 +169,6 @@ function Main {
         exit 1
     }
     
-    # Get recent events
     Write-Info "Last 10 login events:"
     Get-SecurityEvents -MaxEvents 10 | Format-Table -AutoSize
     
@@ -200,5 +188,4 @@ function Main {
     Write-Success "Event log analysis completed"
 }
 
-# Run
 Main
